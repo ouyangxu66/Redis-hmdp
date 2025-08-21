@@ -6,6 +6,6 @@ import java.time.LocalDateTime;
 
 @Data
 public class RedisData {
-    private LocalDateTime expireTime;
-    private Object data;
+    private LocalDateTime expireTime; //设置Key的逻辑过期时间
+    private Object data;  //存入Redis的数据
 }

@@ -52,14 +52,12 @@ public class ShopTypeServiceImpl extends ServiceImpl<ShopTypeMapper, ShopType> i
             return shopTypes;
         }
 
-        //5.数据库中存在,查询返回
+        //5.数据库中存在,将数据写入Redis缓存,返回
         List<String> shopTypeJsonList = shopTypes.stream()
                 .map(JSONUtil::toJsonStr)
                 .collect(Collectors.toList());
 
         shopTypeListCache.leftPushAll(key, shopTypeJsonList);
-        stringRedisTemplate.expire(key, RedisConstants.CACHE_SHOP_TTL, TimeUnit.MINUTES);
-
         return shopTypes;
     }
 }
