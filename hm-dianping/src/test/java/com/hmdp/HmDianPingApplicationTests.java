@@ -58,4 +58,11 @@ class HmDianPingApplicationTests {
         Shop shop = shopService.getById(1L);
         cacheClient.setWithLogicalExpire(RedisConstants.CACHE_SHOP_KEY+1L,shop,10L,TimeUnit.SECONDS);
     }
+    @Test
+    void testThread(){
+        new Thread(()-> System.out.println(Thread.currentThread().getName())).start();
+        new Thread(()-> System.out.println(Thread.currentThread().getName())).start();
+        new Thread(()-> System.out.println(Thread.currentThread().getName())).start();
+        new Thread(()-> System.out.println(Thread.currentThread().getName())).start();
+    }
 }
